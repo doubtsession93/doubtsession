@@ -20,8 +20,8 @@ public class FirbaseIntialize {
             @SuppressWarnings("deprecation")
 			FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://hardwaremartapi.firebaseio.com")
-                    .setStorageBucket("hardwaremartapi.appspot.com")
+                    .setDatabaseUrl("https://hardwaremart-ba4a5.firebaseio.com")
+                    .setStorageBucket("hardwaremart-ba4a5.appspot.com")
                     .build();
             if(FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);

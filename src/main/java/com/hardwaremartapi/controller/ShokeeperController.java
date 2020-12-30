@@ -29,11 +29,16 @@ public class ShokeeperController {
 
 	@PostMapping("/")
 	public ResponseEntity<Shopkeeper> saveShopkeeper(@RequestParam("file") MultipartFile file,
-			@RequestParam("name") String name, @RequestParam("shopName") String shopName,
-			@RequestParam("contactNumber") String contactNumber, @RequestParam("address") String address,
-			@RequestParam("email") String email, @RequestParam("token") String token) throws Exception {
+			@RequestParam("name") String name, 
+			@RequestParam("shopName") String shopName,
+			@RequestParam("contactNumber") String contactNumber, 
+			@RequestParam("address") String address,
+			@RequestParam("email") String email, 
+			@RequestParam("token") String token,
+			@RequestParam("shopKeeperId") String shopKeeperId) throws Exception {
 		Shopkeeper shopkeeper = new Shopkeeper();
 		shopkeeper.setName(name);
+		shopkeeper.setShopKeeperId(shopKeeperId);
 		shopkeeper.setShopName(shopName);
 		shopkeeper.setAddress(address);
 		shopkeeper.setEmail(email);
@@ -43,6 +48,7 @@ public class ShokeeperController {
 		return new ResponseEntity<Shopkeeper>(s, HttpStatus.OK);
 	}
 
+	// http://localhost:8080/shopkeeper/view/434343434343434
 	@GetMapping("/view/{id}")
 	public ResponseEntity<?> viewShopkeeper(@PathVariable("id") String id)
 			throws InterruptedException, ExecutionException, ResourceNotFoundException {

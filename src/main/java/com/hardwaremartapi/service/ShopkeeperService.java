@@ -21,9 +21,7 @@ public class ShopkeeperService {
 		FileUtility fileUtility = new FileUtility();
 		String imageUrl = fileUtility.uploadFile(file);
 		shopkeeper.setImageUrl(imageUrl);
-		String shopKeeperId = firestoredatabase.collection("Shopkeeper").document().getId().toString();
-		shopkeeper.setShopKeeperId(shopKeeperId);
-		firestoredatabase.collection("Shopkeeper").document(shopKeeperId).set(shopkeeper);
+		firestoredatabase.collection("Shopkeeper").document(shopkeeper.getShopKeeperId()).set(shopkeeper);
 		return shopkeeper;
 	}
 
