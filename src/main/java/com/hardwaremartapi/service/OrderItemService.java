@@ -13,10 +13,11 @@ import com.hardwaremartapi.bean.OrderItems;
 @Service
 public class OrderItemService {
 	
-	Firestore fireStore = FirestoreClient.getFirestore();
+	
 	
 	public OrderItems getItems(MultipartFile file, OrderItems items, String orderId) throws IOException {
-	    String imageUrl = new FileUtility().uploadFile(file);
+		Firestore fireStore = FirestoreClient.getFirestore();
+		String imageUrl = new FileUtility().uploadFile(file);
 	    items.setImageUrl(imageUrl);
    	    String productId = fireStore.collection("OrderHistory").document().getId().toString();
 	    items.setProductId(productId);

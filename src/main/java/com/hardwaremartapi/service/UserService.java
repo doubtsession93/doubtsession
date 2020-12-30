@@ -16,9 +16,10 @@ import com.hardwaremartapi.bean.User;
 public class UserService {
 
 	FileUtility fileUtility = new FileUtility();
-	Firestore fireStore = FirestoreClient.getFirestore();
+	
 	
 	public User saveUser(MultipartFile file, User user) throws Exception {
+		
 		Firestore firestoredatabase = FirestoreClient.getFirestore();
 		String imageUrl = fileUtility.uploadFile(file);
 		user.setImageUrl(imageUrl);
@@ -27,6 +28,7 @@ public class UserService {
 	}
 
 	public User updateUser(User user) throws InterruptedException, ExecutionException {
+		Firestore fireStore = FirestoreClient.getFirestore();
 		User u = fireStore.collection("User").document(user.getUserId()).get().get().toObject(User.class);
 		user.setImageUrl(u.getImageUrl());
 		fireStore.collection("User").document(user.getUserId()).set(user);
@@ -35,6 +37,7 @@ public class UserService {
 
 	public User updateUserImage(MultipartFile file, String userId)
 			throws InterruptedException, ExecutionException, IOException {
+		Firestore fireStore = FirestoreClient.getFirestore();
 		User user = fireStore.collection("User").document(userId).get().get().toObject(User.class);
 		FileUtility fileUtility = new FileUtility();
 		String imageUrl = fileUtility.uploadFile(file);
@@ -45,7 +48,7 @@ public class UserService {
 	
 	public User updateUser(MultipartFile file, User user)
 			throws IOException, InterruptedException, Exception {
-	
+		Firestore fireStore = FirestoreClient.getFirestore();
 		String imageUrl = fileUtility.uploadFile(file);	
 		user.setImageUrl(imageUrl);
 		user.setUserId(user.getUserId());
@@ -54,11 +57,13 @@ public class UserService {
 	}
 	
 	public User updateUserWithoutImage(User user) throws IOException, InterruptedException, Exception {
+		Firestore fireStore = FirestoreClient.getFirestore();
 		fireStore.collection("User").document(user.getUserId()).set(user);
 		return user;
 	}
 
 	public User getUserDetails(String currentUserId) throws Exception, Exception {
+		Firestore fireStore = FirestoreClient.getFirestore();
 	    User user = fireStore.collection("User").document(currentUserId).get().get().toObject(User.class); 	
 		return user;
 	}
